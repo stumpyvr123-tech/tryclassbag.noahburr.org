@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>ClassBag</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <style>
+    body {
+      background: rgb(5, 90, 208);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+    }
+
+    .custom-btn {
+      width: 130px;
+      height: 40px;
+      color: #fff;
+      border-radius: 5px;
+      padding: 10px 25px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 500;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+      outline: none;
+    }
+
+    .btn-1 {
+      background: rgb(6, 14, 131);
+      background: linear-gradient(0deg, rgba(6, 14, 131, 1) 0%, rgba(12, 25, 180, 1) 100%);
+      border: none;
+    }
+
+    .btn-1:hover {
+      background: rgb(0, 3, 255);
+      background: linear-gradient(0deg, rgb(0, 17, 255) 0%, rgba(2, 126, 251, 1) 100%);
+    }
+
+    .burger {
+      position: relative;
+      width: 40px;
+      height: 30px;
+      background: transparent;
+      cursor: pointer;
+      display: block;
+    }
+
+    .burger input {
+      display: none;
+    }
+
+    .burger span {
+      display: block;
+      position: absolute;
+      height: 4px;
+      width: 100%;
+      background: black;
+      border-radius: 9px;
+      opacity: 1;
+      left: 0;
+      transform: rotate(0deg);
+      transition: .25s ease-in-out;
+    }
+
+    .burger span:nth-of-type(1) {
+      top: 0px;
+      transform-origin: left center;
+    }
+
+    .burger span:nth-of-type(2) {
+      top: 50%;
+      transform: translateY(-50%);
+      transform-origin: left center;
+    }
+
+    .burger span:nth-of-type(3) {
+      top: 100%;
+      transform-origin: left center;
+      transform: translateY(-100%);
+    }
+
+    .burger input:checked~span:nth-of-type(1) {
+      transform: rotate(45deg);
+      top: 0px;
+      left: 5px;
+    }
+
+    .burger input:checked~span:nth-of-type(2) {
+      width: 0%;
+      opacity: 0;
+    }
+
+    .burger input:checked~span:nth-of-type(3) {
+      transform: rotate(-45deg);
+      top: 28px;
+      left: 5px;
+    }
+
+    /* Position the burger button nicely in the upper left corner */
+    .burger {
+      position: relative;
+      z-index: 100;
+      /* Keeps the button sitting safely on top of everything else */
+      cursor: pointer;
+      display: block;
+    }
+
+    /* === THE SLIDING ACCORDION PANEL CORE === */
+    .sliding-side-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      /* Takes up exactly half of your 400px window */
+      height: 100vh;
+      /* Stretches the panel from the absolute top to bottom */
+      background: #141722;
+      /* Solid dark dashboard background color */
+      border-right: 2px solid #00ffcc;
+      /* Glowing neon accent line */
+      padding: 20px;
+      box-sizing: border-box;
+      z-index: 90;
+      /* Sits right beneath the burger button icon */
+
+      /* HIDES the menu panel completely past the left edge of the screen */
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      /* Ultra-smooth slide action */
+    }
+
+    /* === THE MAGIC SLIDE TRIGGER MATRIX === */
+    /* When the burger input switch is checked, force the menu to slide out instantly! */
+    #burger:checked~.sliding-side-menu {
+      transform: translateX(0);
+      /* Pulls the box cleanly onto the screen monitor canvas */
+    }
+
+    /* Clean styling for your side menu links */
+    .menu-nav-link {
+      display: block;
+      color: #b0b5c1;
+      text-decoration: none;
+      padding: 12px 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+      transition: all 0.2s ease;
+    }
+
+    .menu-nav-link:hover {
+      color: #00ffcc;
+      background: rgba(0, 255, 204, 0.05);
+      padding-left: 15px;
+      /* Tiny slide-in hover effect */
+    }
+  </style>
+
+
+
+  <div style="text-align: center;">
+    <h1>Welcome to ClassBag</h1>
+
+
+    <!-- 1. THE PLAIN TARGET LINK (Put this in your side menu list) -->
+    <a class="custom-btn btn-1" href="#native-popup-box">Navigation</a>
+
+    <!-- 2. THE PURE NATIVE HTML POPUP (Place this right in your body tags) -->
+    <!-- The standard HTML :target pseudo-class centers this box instantly when clicked -->
+    <div id="native-popup-box" class="plain-html-popup-wrapper">
+
+      <table border="1" cellpadding="20" bgcolor="#ffffff" style="color: #000000; margin: auto;">
+        <tr>
+          <td align="center">
+            <h2>Navigation</h2>
+            <button onclick="window.location.href='libraryshelf.html'" class="custom-btn btn-1">Book Shelf</button>
+            <button onclick="window.location.href='home.html'" class="custom-btn btn-1">Dashboard</button>
+
+            <a class="custom-btm btn-1" href="#">X</a>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+
+    <!-- 3. THE ONLY ELEMENTARY ALIGNMENT STYLE REQUIRED -->
+    <style>
+      /* This is just standard web properties to lock it dead center over your screen */
+      .plain-html-popup-wrapper {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        /* Basic default window shading */
+        z-index: 9999;
+      }
+
+      /* The native browser trigger rule: When the link is clicked, display the centered box */
+      .plain-html-popup-wrapper:target {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+
+
+  </div>
+
+
+
+
+  <button onclick="window.location.href='home.html'" class="custom-btn btn-1">Start ClassBag</button>
+  <button onclick="alert('Classbag is an app for the Neshannock Township School District (NSD) .')"
+    class="custom-btn btn-1">What is classbag?</button>
+  </div>
+
+
+
+
+
+
+  <script src="script.js"></script>
+</body>
+
+</html>
